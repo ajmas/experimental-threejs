@@ -1,22 +1,21 @@
 // import THREE, { Object3D } from "three";
 import * as THREE from 'three';
+import { DateTime } from 'luxon';
+import SceneComponent from './interfaces/SceneComponent';
 
-type Mesh = THREE.Mesh;
+// type Mesh = THREE.Mesh;
 
-class Element3D {
-  sphere: Mesh | undefined = undefined;
+class Earth implements SceneComponent {
+  radiusInKm = 6371;
+  pxToRadius = 3185.5;
 
-  init (scene: THREE.Object3D) {
-    // const light = new THREE.AmbientLight( 0x404040, 20 ); // soft white light
-    // scene.add( light );
+  sphere: THREE.Mesh | undefined = undefined;
+  group: THREE.Group | undefined = undefined;
 
-    const plight = new THREE.PointLight(0xffffff, 1);
-    plight.position.set(90, 1, 1)
-    scene.add(plight);
 
+  init (scene: THREE.Scene) {
     const dayTexture = new THREE.TextureLoader().load('textures/earth-blue-marble.jpg');
-    // const nightTexture = new THREE.TextureLoader().load('textures/nightearth-4096.png');
-    const nightTexture = new THREE.TextureLoader().load('textures/mercator-tex.jpg');
+    const nightTexture = new THREE.TextureLoader().load('textures/nightearth-4096.png');
     const bumpTexture = new THREE.TextureLoader().load('textures/earth-topology.png');
 
     const earthSpecularMap = new THREE.TextureLoader().load('textures/earth-water.png');
@@ -25,32 +24,25 @@ class Element3D {
       map: dayTexture,
       bumpMap: bumpTexture,
       emissiveMap: nightTexture,
-      emissive: new THREE.Color(0x777777),
-      emissiveIntensity: 4,
+      emissive: new THREE.Color(0x888888),
+      emissiveIntensity: 5,
       specularMap: earthSpecularMap,
-      // specular: 1,
-      // shininess: 15,
-      bumpScale: 19
+      specular: 1,
+      shininess: 15,
+      bumpScale: 1
     });
 
-    // const nightMaterial = new THREE.MeshBasicMaterial({
-    //   map: texture2,
-    //   alphaTest: 0.5
-    // });
 
-    // const materials = [ dayMaterial ];//, nightMaterial ];
-    const radius = 2;
-    // const geometry = new THREE.SphereGeometry( 1, 64, 32 );
+    const radius = this.radiusInKm / this.pxToRadius;
     const geometry = new THREE.SphereGeometry(radius, 32, 32);
-    // const material = new THREE.Mesh({ map: materials });
     this.sphere = new THREE.Mesh( geometry, dayMaterial );
     scene.add( this.sphere );
   }
 
-  update () {
-    // TODO
+  update(_scene?: THREE.Scene | undefined): void | Promise<void> {
     if (this.sphere) {
-     this.sphere.rotation.y += 0.005;
+    //  this.sphere.rotation.y += 0.005;
+    //  this.
     }
   }
 
@@ -59,4 +51,4 @@ class Element3D {
   }
 }
 
-export default new Element3D();
+export default Earth;

@@ -6,7 +6,7 @@ type Mesh = THREE.Mesh;
 class Element3D {
   sphere: Mesh | undefined = undefined;
 
-  init (scene: THREE.Object3D) {
+  init (scene: THREE.Scene) {
     const texture = new THREE.TextureLoader().load('textures/mercator-tex.jpg');
 
     const geometry = new THREE.SphereGeometry( 1, 64, 32 );

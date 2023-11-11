@@ -6,10 +6,6 @@ import SceneComponent from './interfaces/SceneComponent';
 class Satellites implements SceneComponent{
   // sphere: Mesh | undefined = undefined;
 
-  convertGeoCoord2Position (latutude: number, longitude: number, altitudeInKm: number) {
-
-  }
-
   init (scene: THREE.Scene) {
     const textureLoader = new THREE.TextureLoader();
     const geometry = new THREE.BufferGeometry();
@@ -20,9 +16,9 @@ class Satellites implements SceneComponent{
       texture.colorSpace = THREE.SRGBColorSpace;
     };
 
-    const sprite1 = textureLoader.load( 'textures/dot-blue.png', assignSRGB );
-    const sprite2 = textureLoader.load( 'textures/dot-grey.png', assignSRGB );
-    const sprite3 = textureLoader.load( 'textures/dot-red.png', assignSRGB );
+    const sprite1 = textureLoader.load( 'textures/sprites/snowflake1.png', assignSRGB );
+    const sprite2 = textureLoader.load( 'textures/sprites/snowflake2.png', assignSRGB );
+    const sprite3 = textureLoader.load( 'textures/sprites/snowflake3.png', assignSRGB );
     const sprite4 = textureLoader.load( 'textures/sprites/snowflake4.png', assignSRGB );
     const sprite5 = textureLoader.load( 'textures/sprites/snowflake5.png', assignSRGB );
 
